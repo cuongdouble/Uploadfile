@@ -1,15 +1,23 @@
 $logPath = "C:\Users\kioskuser\AppData\Local\Google\Chrome\User Data\chrome_debug.log"
-if (Test-Path $logPath) {
-    $lines = Get-Content $logPath
+$lastPosterLine = $null
 
-    if ($lines.Count -gt 0) {
-        $posterLine = $lines | Where-Object { $_ -match "poster_impression" } | Select-Object -Last 1
-        
-        if ($posterLine) {
-            Write-Output $posterLine
-        } else {
-            Write-Output "No line containing 'poster_impression' found."
+if (Test-Path $logPath) {
+    $reader = [System.IO.StreamReader]::new($logPath)
+
+    while (($line = $reader.ReadLine()) -ne $null) {
+        if ($line -match "poster_impression") {
+            $lastPosterLine = $line
         }
     }
 
+    $reader.Close()
+
+    if ($lastPosterLine) {
+        Write-Output "Last line containing 'poster_impression':"
+        Write-Output $lastPosterLine
+    } else {
+        Write-Output "No line containing 'poster_impression' found."
+    }
+} else {
+    Write-Output "Log file not found."
 }
