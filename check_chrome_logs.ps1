@@ -1,4 +1,4 @@
-$logPath = "%TEMP%\ChromeKiosk\chrome_debug.log"
+$logPath = "$env:TEMP\ChromeKiosk\chrome_debug.log"
 
 if (Test-Path $logPath) {
     # Check file size (in bytes)
