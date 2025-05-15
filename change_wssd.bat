@@ -1,0 +1,1 @@
+sc config wssdagent start= delayed-auto
