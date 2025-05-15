@@ -10,7 +10,7 @@ set errorUrl="https://localhost:11198/error.html"
 set connected=FALSE
 
 set chromePath="C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
-set chromeParams=--kiosk --incognito --disable-features=ServiceWorker --disable-service-worker --user-data-dir="%TEMP%\ChromeKiosk" --check-for-update-interval=604800 --simulate-outdated-no-au="01 Jan 2032" --no-first-run --disable-session-crashed-bubble --disable-infobars --disable-translate --disable-tab-switcher --disable-pinch --overscroll-history-navigation=0 --disable-background-timer-throttling --disable-renderer-backgrounding --disable-features=FreezeUserAgent,CalculateNativeWinOcclusion --disable-backgrounding-occluded-windows --enable-gpu-rasterization --force-compositing-mode --enable-logging --v=1
+set chromeParams=--kiosk --incognito --check-for-update-interval=604800 --simulate-outdated-no-au="01 Jan 2032" --no-first-run --disable-session-crashed-bubble --disable-infobars --disable-translate --disable-tab-switcher --disable-pinch --overscroll-history-navigation=0 --disable-background-timer-throttling --disable-renderer-backgrounding --disable-features=FreezeUserAgent,CalculateNativeWinOcclusion --disable-backgrounding-occluded-windows --enable-gpu-rasterization --force-compositing-mode --enable-logging --v=1
 
 :: Enumerate and test all connected interfaces
 echo.
@@ -62,7 +62,7 @@ if %connected%==FALSE (
 )
 
 @echo [%date% %time%] Checking LMS service...
-FOR /L %%G IN (1,1,40) DO (
+FOR /L %%G IN (1,1,200) DO (
     @echo|set /p="."
     curl -L --silent --max-time 3 https://localhost:11198/api/heartbeat >nul 2>&1 && (
         goto end_of_lms_check
