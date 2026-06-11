@@ -1,0 +1,1 @@
+Import-Certificate -FilePath "C:\iotedge installer\certs\LocalVideoService_cert.crt" -CertStoreLocation "Cert:\LocalMachine\Root" -ErrorAction SilentlyContinue
